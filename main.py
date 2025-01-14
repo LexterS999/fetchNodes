@@ -101,8 +101,6 @@ def main():
     ]
     dir_links = [
         "https://ghp.ci/https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/python/hysteria2",
-        "https://raw.githubusercontent.com/coldwater-10/V2rayCollector/main/vless_iran.txt",
-        "https://raw.githubusercontent.com/wudongdefeng/free/main/freevm/list_raw.txt",
     ]
 
     decoded_links = decode_links(links)
