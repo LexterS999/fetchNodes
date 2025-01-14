@@ -126,12 +126,12 @@ def main():
         for config in merged_configs:
             f.write(config + "\n")
 
-    # Split merged configs into smaller files (no more than 600 configs per file)
+    # Split merged configs into smaller files (no more than N configs per file)
     with open(output_filename, "r", encoding='utf-8') as f:
         lines = f.readlines()
 
     num_lines = len(lines)
-    max_lines_per_file = 600
+    max_lines_per_file = 2000
     num_files = (num_lines + max_lines_per_file - 1) // max_lines_per_file
 
     for i in range(num_files):
