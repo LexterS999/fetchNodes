@@ -6,7 +6,7 @@ import os
 from more_thread_sort import sort_nodes
 
 # Define a fixed timeout for HTTP requests
-TIMEOUT = 20  # seconds
+TIMEOUT = 30  # seconds
 
 
 # Base64 decoding function
@@ -131,7 +131,7 @@ def main():
         lines = f.readlines()
 
     num_lines = len(lines)
-    max_lines_per_file = 2000
+    max_lines_per_file = 9000
     num_files = (num_lines + max_lines_per_file - 1) // max_lines_per_file
 
     for i in range(num_files):
