@@ -3402,6 +3402,7 @@ trojan://telegram-id-privatevpns@3.70.219.173:22222?security=tls&alpn=http/1.1&h
 trojan://telegram-id-privatevpns@51.20.195.87:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#👨‍🚀Free👨‍🚀
 trojan://telegram-id-privatevpns@18.203.118.212:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#👨‍🚀Free👨‍🚀
 trojan://bpb-
+trojan://telegram-id-directvpn@54.83.21.166:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#👉🆔 @v2ray_configs_pool📡🇺🇸United States
 trojan://bcacaab-baca-baca-dbac-accaabbcbacb@127.0.0.1:1080?security=tls&type=tcp#%F0%9F%94%84%20LATEST-UPDATE%20%F0%9F%93%85%20Mon-20-Jan-2025 20:43
 trojan://bcacaab-baca-baca-dbac-accaabbcbacb@127.0.0.1:8080?security=tls&type=tcp#%C2%A9Made%20by:%20github.com/MhdiTaheri%20%F0%9F%93%8C
 trojan://9d0a75d2-f747-4afa-b43f-d208af9e8f9a@168.138.142.53:443?type=tcp&headerType=none&security=tls&sni=bz02.ssr.ee#[🇧🇷] [tr-tl-tc] [mon-07pm-1007291]
