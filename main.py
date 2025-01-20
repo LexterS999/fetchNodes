@@ -174,7 +174,7 @@ def main():
         lines = f.readlines()
 
     num_lines = len(lines)
-    max_lines_per_file = 2000
+    max_lines_per_file = 3200
     num_files = (num_lines + max_lines_per_file - 1) // max_lines_per_file
 
     for i in range(num_files):
