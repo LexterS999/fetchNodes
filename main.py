@@ -83,20 +83,23 @@ def main():
     protocols = ["vmess", "vless", "trojan", "ss", "ssr", "hy2", "tuic", "warp://"]
     links = [
         "https://raw.githubusercontent.com/lagzian/SS-Collector/refs/heads/main/VLESS/VL100.txt",
-        "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
-        "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Splitted-By-Protocol/tuic.txt",
-        "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/vless",
-        "https://raw.githubusercontent.com/Surfboardv2ray/Proxy-sorter/main/ws_tls/proxies/wstls",
-        "https://raw.githubusercontent.com/wuqb2i4f/xray-config-toolkit/refs/heads/main/output/base64/mix-security-re",
-        "https://raw.githubusercontent.com/wuqb2i4f/xray-config-toolkit/refs/heads/main/output/base64/mix-security-tl",
-        "https://raw.githubusercontent.com/wuqb2i4f/xray-config-toolkit/refs/heads/main/output/base64/mix-network-xh",
-        "https://raw.githubusercontent.com/Surfboardv2ray/v2ray-worker-sub/refs/heads/master/sub",
-        "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/vless",
-        "https://raw.githubusercontent.com/Surfboardv2ray/xhttp-parser/refs/heads/main/output/xhttp.txt",
+        "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/subscribe/security/tls",
+        "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Configs_TLS.txt",
+        "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Splitted-By-Protocol/vless.txt",
         "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/two_file_vpn.txt",
+        "https://raw.githubusercontent.com/Surfboardv2ray/Proxy-sorter/main/output/converted.txt",
+        "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/vless",
+        "https://raw.githubusercontent.com/Surfboardv2ray/v2ray-worker-sub/refs/heads/master/sub",
     ]
     dir_links = [
-        "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Splitted-By-Protocol/tuic.txt",
+        "https://raw.githubusercontent.com/lagzian/SS-Collector/refs/heads/main/VLESS/VL100.txt",
+        "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/subscribe/security/tls",
+        "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Configs_TLS.txt",
+        "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Splitted-By-Protocol/vless.txt",
+        "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/two_file_vpn.txt",
+        "https://raw.githubusercontent.com/Surfboardv2ray/Proxy-sorter/main/output/converted.txt",
+        "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/vless",
+        "https://raw.githubusercontent.com/Surfboardv2ray/v2ray-worker-sub/refs/heads/master/sub",
     ]
 
     decoded_links = decode_links(links)
