@@ -24,9 +24,11 @@ LINKS = [
 ]
 DIR_LINKS = LINKS
 MAX_LINES_PER_FILE = 6000
-OUTPUT_FOLDER = "Output"
-BASE64_FOLDER_NAME = "Base64"
-SUB_FOLDER_NAME = "Subs"
+
+# Измененная конфигурация директорий
+OUTPUT_FOLDER = "fetchNodes"  # Корневая папка теперь "fetchNodes"
+BASE64_FOLDER_NAME = "Splitted-By-Protocol" # Папка для base64 файлов
+SUB_FOLDER_NAME = "Subs" # Папка для обычных текстовых файлов
 
 
 # Base64 decoding function
@@ -34,8 +36,8 @@ def decode_base64(encoded):
     decoded = ""
     try:
         decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode("utf-8")
-    except (UnicodeDecodeError, binascii.Error, LookupError) as e: # Добавлено отслеживание LookupError и имени исключения
-        logging.error(f"Ошибка декодирования Base64: {e}") # Логирование ошибки декодирования
+    except (UnicodeDecodeError, binascii.Error, LookupError) as e:
+        logging.error(f"Ошибка декодирования Base64: {e}")
         pass
     return decoded
 
@@ -87,13 +89,13 @@ def sort_data_by_protocol(data, protocols):
 def rename_profiles(configs):
     renamed_configs = []
     for index, config in enumerate(configs):
-        hash_index = config.rfind("#") # Ищем последний символ '#'
+        hash_index = config.rfind("#")
         if hash_index != -1:
-            base_config = config[:hash_index].rstrip() # Обрезаем строку до '#' и удаляем пробелы справа
-            renamed_config = f"{base_config} #({index + 1})" # Добавляем новый профиль с номером и пробелом
+            base_config = config[:hash_index].rstrip()
+            renamed_config = f"{base_config} #({index + 1})"
             renamed_configs.append(renamed_config)
         else:
-            renamed_configs.append(config.rstrip() + f" #({index + 1})") # Если '#' нет, добавляем в конец и удаляем пробелы справа
+            renamed_configs.append(config.rstrip() + f" #({index + 1})")
     return renamed_configs
 
 
@@ -103,9 +105,9 @@ def ensure_directories_exist(output_folder_name, base64_folder_name, sub_folder_
     base64_folder = os.path.join(output_folder, base64_folder_name)
     sub_folder = os.path.join(output_folder, sub_folder_name)
 
-    os.makedirs(output_folder, exist_ok=True)
-    os.makedirs(base64_folder, exist_ok=True)
-    os.makedirs(sub_folder, exist_ok=True)
+    os.makedirs(output_folder, exist_ok=True, mode=0o777) # Ensure write permissions
+    os.makedirs(base64_folder, exist_ok=True, mode=0o777) # Ensure write permissions
+    os.makedirs(sub_folder, exist_ok=True, mode=0o777) # Ensure write permissions
 
     return output_folder, base64_folder, sub_folder
 
@@ -119,45 +121,50 @@ def main():
 
     combined_data = decoded_links_data + decoded_dir_links_data
 
-    logging.info(f"Исходное количество строк: {len(combined_data)}") # Отладка: исходное количество
+    logging.info(f"Исходное количество строк: {len(combined_data)}")
 
     # Удаление дубликатов
     unique_data = list(set(combined_data))
-    logging.info(f"Удалено дубликатов: {len(combined_data) - len(unique_data)}, осталось уникальных: {len(unique_data)}") # Отладка: дедупликация
+    logging.info(f"Удалено дубликатов: {len(combined_data) - len(unique_data)}, осталось уникальных: {len(unique_data)}")
 
     filtered_configs = filter_for_protocols(unique_data, ALLOWED_PROTOCOLS_PREFIXES)
-    logging.info(f"После фильтрации протоколов осталось: {len(filtered_configs)}") # Отладка: фильтрация
+    logging.info(f"После фильтрации протоколов осталось: {len(filtered_configs)}")
 
     # Сортировка по протоколу
     sorted_configs = sort_data_by_protocol(filtered_configs, PROTOCOLS)
 
-    logging.info("Применяется переименование профилей...") # Отладка: начало переименования
+    logging.info("Применяется переименование профилей...")
     # Переименование профилей
     renamed_configs = rename_profiles(sorted_configs)
-    logging.info(f"Переименовано профилей: {len(renamed_configs)}") # Отладка: конец переименования, количество переименованных
+    logging.info(f"Переименовано профилей: {len(renamed_configs)}")
 
-    logging.debug(f"Первые 5 переименованных конфигов: {renamed_configs[:5]}") # Отладка: просмотр первых нескольких переименованных конфигов
+    logging.debug(f"Первые 5 переименованных конфигов: {renamed_configs[:5]}")
 
     # Clean existing output files
     output_filename = os.path.join(output_folder, "All_Subs.txt")
+    base64_output_filename_pattern = os.path.join(base64_folder, "Sub{}_base64.txt") # Pattern for base64 files
+    sub_output_filename_pattern = os.path.join(sub_folder, "Sub{}.txt") # Pattern for sub files
 
     if os.path.exists(output_filename):
         os.remove(output_filename)
+        logging.info(f"Удален старый файл: {output_filename}") # Лог удаления All_Subs.txt
 
-    # Удаление старых файлов Sub{i}.txt и Sub{i}_base64.txt
     for i in range(20): # Увеличьте диапазон при необходимости
-        sub_filename = os.path.join(sub_folder, f"Sub{i+1}.txt")
-        base64_filename = os.path.join(base64_folder, f"Sub{i+1}_base64.txt")
+        sub_filename = sub_output_filename_pattern.format(i+1)
+        base64_filename = base64_output_filename_pattern.format(i+1)
         if os.path.exists(sub_filename):
             os.remove(sub_filename)
+            logging.info(f"Удален старый файл: {sub_filename}") # Лог удаления Sub{i}.txt
         if os.path.exists(base64_filename):
             os.remove(base64_filename)
+            logging.info(f"Удален старый файл: {base64_filename}") # Лог удаления Sub{i}_base64.txt
 
 
     # Write merged configs to output file
     with open(output_filename, "w", encoding='utf-8') as f:
-        for config in renamed_configs: # Используем переименованные конфиги
+        for config in renamed_configs:
             f.write(config + "\n")
+        logging.info(f"Записан файл: {output_filename}, строк: {len(renamed_configs)}") # Лог записи All_Subs.txt
 
     # Split merged configs into smaller files
     with open(output_filename, "r", encoding='utf-8') as f:
@@ -167,19 +174,21 @@ def main():
     num_files = (num_lines + MAX_LINES_PER_FILE - 1) // MAX_LINES_PER_FILE
 
     for i in range(num_files):
-        sub_filename = os.path.join(sub_folder, f"Sub{i + 1}.txt") # Нумерация с 1
+        sub_filename = sub_output_filename_pattern.format(i + 1) # Using pattern
         with open(sub_filename, "w", encoding='utf-8') as f:
             start_index = i * MAX_LINES_PER_FILE
             end_index = min((i + 1) * MAX_LINES_PER_FILE, num_lines)
-            for line in lines[start_index:end_index]:
-                f.write(line)
+            sub_file_lines = lines[start_index:end_index]
+            f.writelines(sub_file_lines) # Use writelines for efficiency
+            logging.info(f"Записан файл: {sub_filename}, строк: {len(sub_file_lines)}") # Лог записи Sub{i}.txt
 
-        base64_filename = os.path.join(base64_folder, f"Sub{i + 1}_base64.txt") # Нумерация с 1
+        base64_filename = base64_output_filename_pattern.format(i + 1) # Using pattern
         with open(base64_filename, "w", encoding='utf-8') as output_file:
-            with open(sub_filename, "r", encoding='utf-8') as input_file: # Читаем данные из Sub{i}.txt
+            with open(sub_filename, "r", encoding='utf-8') as input_file:
                 config_data = input_file.read()
             encoded_config = base64.b64encode(config_data.encode()).decode()
             output_file.write(encoded_config)
+            logging.info(f"Записан файл: {base64_filename}, base64 версия файла: {sub_filename}") # Лог записи Sub{i}_base64.txt
 
 
 if __name__ == "__main__":
