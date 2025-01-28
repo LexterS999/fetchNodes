@@ -1,8 +1,8 @@
 name: Run main.py manually
 
 on:
-  # schedule:
-  #   - cron: "0 */4 * * *" # Раскомментируйте для автоматического запуска по расписанию (сейчас отключено)
+  schedule:
+  - cron: "0 */6 * * *"
   workflow_dispatch: # Разрешить ручной запуск workflow
 
 jobs:
