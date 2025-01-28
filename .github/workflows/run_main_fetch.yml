@@ -2,49 +2,56 @@ name: Run main.py manually
 
 on:
   # schedule:
-  #   - cron: "0 */4 * * *" # 注释掉定时触发
-  workflow_dispatch: # 允许手动触发
+  #   - cron: "0 */4 * * *" # Раскомментируйте для автоматического запуска по расписанию (сейчас отключено)
+  workflow_dispatch: # Разрешить ручной запуск workflow
 
 jobs:
   run-main:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出仓库代码
+      # 1. Выгрузка кода репозитория
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # 确保拉取完整提交历史
+          fetch-depth: 0 # Важно: для корректной работы git pull нужно полное история
 
-      # 设置 Python 环境
+      # 2. Настройка Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12 # 替换为你的 Python 版本
+          python-version: 3.12 # Укажите вашу версию Python
 
-      # 安装依赖项
+      # 3. Установка зависимостей (если есть requirements.txt)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 运行 main.py
+      # 4. Запуск скрипта main.py
       - name: Run main.py
         run: python main.py
 
-      # 清理 __pycache__
+      # 5. Очистка __pycache__ (необязательно, но рекомендуется)
       - name: Clean up __pycache__
         run: |
           find . -name "__pycache__" -type d -exec rm -rf {} +
 
-      # 提交生成的文件回仓库
+      # 6. Коммит и отправка изменений в репозиторий
       - name: Commit and push changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git pull origin master # 确保与远程分支同步
-          git add . 
+          git pull origin master # Важно: синхронизация с удаленным репозиторием перед коммитом
+          git add .
           git commit -m "♻️ $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S') Collected"
+          # Если нет изменений после запуска скрипта, коммит не будет создан, и push ничего не отправит.
+          # Это НОРМАЛЬНО, если данные не обновились.
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # **ВАЖНО ПРОВЕРИТЬ:**
+      # - Убедитесь, что файлы, которые должен менять main.py, не игнорируются в .gitignore.
+      # - Проверьте, обновляются ли данные по ссылкам из LINKS в main.py.
+      # - Если данные не меняются, то "nothing to commit" - это ожидаемое поведение.
