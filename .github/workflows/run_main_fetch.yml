@@ -43,11 +43,16 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git pull origin master # Важно: синхронизация с удаленным репозиторием перед коммитом
-          git add .
-          git commit -m "♻️ $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S') Collected"
-          # Если нет изменений после запуска скрипта, коммит не будет создан, и push ничего не отправит.
-          # Это НОРМАЛЬНО, если данные не обновились.
-          git push origin master
+
+          # Check if there are any changes using git status --porcelain
+          if ! git status --porcelain --untracked-files=no | grep -q '.'; then
+            echo "No changes to commit, skipping commit and push."
+          else
+            git add .
+            git commit -m "♻️ $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S') Collected"
+            git push origin master
+            echo "Changes committed and pushed."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
