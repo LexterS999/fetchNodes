@@ -10,39 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. (Checkout repository code)
-      - name: Шаг 1: Извлечение кода репозитория
+      # 1. 检出仓库代码 (Checkout repository code)
+      - name: 检出 репозиторий
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Для полной истории коммитов
 
-      # 2. (Set up Python environment)
-      - name: Шаг 2: Настройка Python
+      # 2. 设置 Python 环境 (Set up Python environment)
+      - name: Настроить Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.12 # Укажите вашу версию Python
 
-      # 3. (Install dependencies)
-      - name: Шаг 3: Установка зависимостей
+      # 3. 安装依赖项 (Install dependencies)
+      - name: Установить зависимости
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 4. (Run main.py)
-      - name: Шаг 4: Запуск скрипта сбора подписок main.py
+      # 4. 运行 main.py (Run main.py)
+      - name: Запустить скрипт сбора подписок main.py
         run: python main.py
 
-      # 5. (Clean up __pycache__)
-      - name: Шаг 5: Очистка __pycache__
+      # 5. 清理 __pycache__ (Clean up __pycache__)
+      - name: Очистить __pycache__
         run: |
           find . -name "__pycache__" -type d -exec rm -rf {} +
 
       # 6. Проверка статуса Git (Check Git status for debugging)
-      - name: Шаг 6: Проверка статуса Git
+      - name: Проверить статус Git
         run: git status
 
-      # 7. (Commit and push generated files back to repository)
-      - name: Шаг 7: Коммит и отправка изменений
+      # 7. 提交生成的文件回仓库 (Commit and push generated files back to repository)
+      - name: Коммит и отправка изменений
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions Bot" # Более информативное имя бота
