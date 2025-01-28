@@ -3,13 +3,12 @@ import base64
 import requests
 import binascii
 import os
-import logging  # Добавлен модуль logging
-# from more_thread_sort import sort_nodes # Закомментировано, пока не выясним назначение
+import logging
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Конфигурация (можно вынести в отдельный файл или аргументы командной строки)
+# Конфигурация
 TIMEOUT = 30  # seconds
 PROTOCOLS = ["vmess", "vless", "trojan", "ss", "ssr", "hy2", "tuic", "warp://"]
 LINKS = [
@@ -22,9 +21,9 @@ LINKS = [
     "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/vless",
     "https://raw.githubusercontent.com/Surfboardv2ray/v2ray-worker-sub/refs/heads/master/sub",
 ]
-DIR_LINKS = LINKS  # Используем LINKS, если dir_links должны быть идентичны, иначе укажите другой список
+DIR_LINKS = LINKS
 MAX_LINES_PER_FILE = 6000
-OUTPUT_FOLDER = "Output" # Имя выходной папки
+OUTPUT_FOLDER = "Output"
 BASE64_FOLDER_NAME = "Base64"
 SUB_FOLDER_NAME = "Subs"
 
@@ -47,7 +46,7 @@ def fetch_and_decode_links(links, decode_content=True):
     for link in links:
         try:
             response = requests.get(link, timeout=TIMEOUT)
-            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            response.raise_for_status()
             encoded_bytes = response.content
             if decode_content:
                 decoded_text = decode_base64(encoded_bytes)
@@ -68,6 +67,22 @@ def filter_for_protocols(data, protocols):
             filtered_data.append(line)
     return filtered_data
 
+# Функция для определения протокола из строки
+def get_protocol_from_line(line, protocols):
+    for protocol in protocols:
+        if line.startswith(protocol + "://"): # Проверка начала строки на протокол://
+            return protocol
+    return "other" # Если протокол не найден, возвращаем "other"
+
+# Функция сортировки данных по протоколу, затем по алфавиту
+def sort_data_by_protocol(data, protocols):
+    def protocol_sort_key(line):
+        protocol = get_protocol_from_line(line, protocols)
+        protocol_priority = protocols.index(protocol) if protocol != "other" else len(protocols) # Приоритет протокола, "other" в конце
+        return (protocol_priority, line) # Сортировка сначала по приоритету протокола, затем по строке
+
+    return sorted(data, key=protocol_sort_key)
+
 
 # Create necessary directories if they don't exist
 def ensure_directories_exist(output_folder_name, base64_folder_name, sub_folder_name):
@@ -86,8 +101,8 @@ def ensure_directories_exist(output_folder_name, base64_folder_name, sub_folder_
 def main():
     output_folder, base64_folder, sub_folder = ensure_directories_exist(OUTPUT_FOLDER, BASE64_FOLDER_NAME, SUB_FOLDER_NAME)
 
-    decoded_links_data = fetch_and_decode_links(LINKS, decode_content=True) # Для links декодируем base64
-    decoded_dir_links_data = fetch_and_decode_links(DIR_LINKS, decode_content=False) # Для dir_links не декодируем base64
+    decoded_links_data = fetch_and_decode_links(LINKS, decode_content=True)
+    decoded_dir_links_data = fetch_and_decode_links(DIR_LINKS, decode_content=False)
 
     combined_data = decoded_links_data + decoded_dir_links_data
 
@@ -97,20 +112,28 @@ def main():
 
     merged_configs = filter_for_protocols(unique_data, PROTOCOLS)
 
+    # Сортировка по протоколу
+    sorted_configs = sort_data_by_protocol(merged_configs, PROTOCOLS)
+
     # Clean existing output files
     output_filename = os.path.join(output_folder, "All_Subs.txt")
 
     if os.path.exists(output_filename):
         os.remove(output_filename)
 
-    for i in range(20): # Увеличьте диапазон, если нужно больше файлов Sub{i}.txt
-        filename = os.path.join(sub_folder, f"Sub{i+1}.txt")
-        if os.path.exists(filename):
-            os.remove(filename)
+    # Удаление старых файлов Sub{i}.txt и Sub{i}_base64.txt
+    for i in range(20): # Увеличьте диапазон при необходимости
+        sub_filename = os.path.join(sub_folder, f"Sub{i+1}.txt")
+        base64_filename = os.path.join(base64_folder, f"Sub{i+1}_base64.txt")
+        if os.path.exists(sub_filename):
+            os.remove(sub_filename)
+        if os.path.exists(base64_filename):
+            os.remove(base64_filename)
+
 
     # Write merged configs to output file
     with open(output_filename, "w", encoding='utf-8') as f:
-        for config in merged_configs:
+        for config in sorted_configs: # Используем отсортированные конфиги
             f.write(config + "\n")
 
     # Split merged configs into smaller files
@@ -121,24 +144,21 @@ def main():
     num_files = (num_lines + MAX_LINES_PER_FILE - 1) // MAX_LINES_PER_FILE
 
     for i in range(num_files):
-        input_filename = os.path.join(sub_folder, f"Sub{i + 1}.txt")
-        with open(input_filename, "w", encoding='utf-8') as f:
+        sub_filename = os.path.join(sub_folder, f"Sub{i + 1}.txt") # Нумерация с 1
+        with open(sub_filename, "w", encoding='utf-8') as f:
             start_index = i * MAX_LINES_PER_FILE
             end_index = min((i + 1) * MAX_LINES_PER_FILE, num_lines)
             for line in lines[start_index:end_index]:
                 f.write(line)
 
-        with open(input_filename, "r", encoding='utf-8') as input_file:
-            config_data = input_file.read()
-
-        output_filename = os.path.join(base64_folder, f"Sub{i + 1}_base64.txt")
-        with open(output_filename, "w", encoding='utf-8') as output_file:
+        base64_filename = os.path.join(base64_folder, f"Sub{i + 1}_base64.txt") # Нумерация с 1
+        with open(base64_filename, "w", encoding='utf-8') as output_file:
+            with open(sub_filename, "r", encoding='utf-8') as input_file: # Читаем данные из Sub{i}.txt
+                config_data = input_file.read()
             encoded_config = base64.b64encode(config_data.encode()).decode()
             output_file.write(encoded_config)
 
 
 if __name__ == "__main__":
-    # 获取 и обработка подписок
+    # Получение и обработка подписок
     main()
-    # Классификация подписок (если необходимо, раскомментируйте и уточните назначение sort_nodes)
-    # sort_nodes()
