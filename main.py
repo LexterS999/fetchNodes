@@ -35,7 +35,8 @@ SUB_FOLDER_NAME = "Subs" # Папка для обычных текстовых �
 def decode_base64(encoded):
     decoded = ""
     try:
-        decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode("utf-8")
+        decoded_bytes = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4))
+        decoded = decoded_bytes.decode("utf-8", errors='ignore') # Добавлено errors='ignore'
     except (UnicodeDecodeError, binascii.Error, LookupError) as e:
         logging.error(f"Ошибка декодирования Base64: {e}")
         pass
