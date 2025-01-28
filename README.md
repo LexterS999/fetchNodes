@@ -1,39 +1,55 @@
-# 🔒 Sing-box V2ray 节点收集 🌐
+🔒 Сборник узлов Sing-box V2ray 🌐  
+**Категоризация узлов на GitHub**  
 
-### GitHub节点收集分类
+- Все собранные узлы доступны в файле **All_Subs.txt**  
+- Классифицированные узлы по протоколам находятся в папке **Splitted-By-Protocol**  
+- Для использования подписки (subscription) активируйте **ускорение GitHub**.  
 
-* 收集的所有节点在All_Subs.txt
-* 分类节点在Splitted-By-Protocol文件夹下
-* 如需订阅自行使用GitHub加速
+---
 
-### 本地使用方法
-* git到本地
-* 需要安装python
-* 安装依赖   pip install -r requirements
-* 运行 main.py
-* 本地使用需注意main函数中列表的订阅链接做GitHub加速，否则网络不通，无法获取订阅内容
+### 🖥 Локальная настройка:
+1. Клонируйте репозиторий через `git clone`.  
+2. Установите **Python** (версия 3.7+).  
+3. Установите зависимости:  
+   ```bash
+   pip install -r requirements.txt
+   ```  
+4. Запустите скрипт:  
+   ```bash
+   python main.py
+   ```  
+⚠️ **Важно:**  
+- В функции `main()` замените ссылки в списке подписок на ускоренные версии GitHub (в противном случае скрипт не сможет получить данные).  
 
-### Actions使用方法
-* fork到自己的仓库
-* 运行Actions，获得Splitted-By-Protocol订阅内容
-* .github文件中的工作流run_main_fetch.yml定时未开，更改【  #   - cron: "0 */4 * * *" 】# 注释掉定时触发，去掉注释触发每4小时执行收集节点一次
-* Actions运行报错，确保 GITHUB_TOKEN 有足够权限
+---
 
-  参考步骤：
-  打开你的 GitHub 仓库。
-  进入 Settings > Actions > General。
-  滑动到 Workflow permissions，确保选择的是：Read and write permissions。
-启用 Allow GitHub Actions to create and approve pull requests（如果适用）。
-保存设置。
+### ⚙️ Использование GitHub Actions:
+1. Сделайте **fork** репозитория.  
+2. Запустите **Actions** → получите классифицированные подписки в папке **Splitted-By-Protocol**.  
+3. Для автоматического обновления узлов:  
+   - В файле **.github/workflows/run_main_fetch.yml** раскомментируйте строку:  
+     ```yaml
+     - cron: "0 */4 * * *"  # Таймер: каждые 4 часа
+     ```  
+4. При ошибках в Actions:  
+   - Убедитесь, что **GITHUB_TOKEN** имеет права:  
+     - **Settings → Actions → General → Workflow permissions** → Выберите: *Read and write permissions*.  
+     - Активируйте **Allow GitHub Actions to create and approve pull requests**.  
 
+---
 
-### 说明
-* 项目fork前辈，适当修改，仅供Python学习交流使用
-* 节点获取地址更改和定阅，github搜索节点，只支持类似["vmess://", "vless://", "trojan://", "ss://", "ssr://", "hy2://", "tuic://", "warp://"]形式
-* 打开main.py，在函数main中，找到列表links（base64编码）和dir_links，将找到的类似订阅地址，放入对应的这两个列表内，订阅地址内容要注意！！！
-* 运行main.py,在subs文件中生成分类的节点类型，订阅或复制使用
+### 📝 Примечания:
+- Проект адаптирован на основе исходного репозитория. **Только для обучения Python!**  
+- Поддерживаемые форматы узлов:  
+  ```python
+  ["vmess://", "vless://", "trojan://", "ss://", "ssr://", "hy2://", "tuic://", "warp://"]
+  ```  
+- Чтобы добавить свои подписки:  
+  1. Откройте **main.py**.  
+  2. В функции `main()` найдите списки `links` (base64) и `dir_links`.  
+  3. Вставьте свои подписки в эти списки. **Проверьте корректность ссылок!**  
+  4. Запустите скрипт → узлы появятся в папке **subs**.  
 
+--- 
 
-
-#
-![Visitor's Count](https://profile-counter.glitch.me/Supprise0901_fetchNodes/count.svg)
+📌 **Используйте узлы на свой риск.** Авторы не несут ответственности за нарушения правил платформ.
