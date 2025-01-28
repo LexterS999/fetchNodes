@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # Разрешить ручной запуск из интерфейса GitHub Actions
 
 jobs:
-  обновить-подписки:
+  update-subscriptions: # Исправленный идентификатор jobs - используем латиницу и дефисы
     runs-on: ubuntu-latest
 
     steps:
