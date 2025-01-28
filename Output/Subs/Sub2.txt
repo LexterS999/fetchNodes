@@ -1708,7 +1708,7 @@ trojan://blue2024@104.17.40.244:443?security=tls&sni=td.promote.icu&type=tcp#�
 vless://cc6b985d-0362-4129-8763-38564174fb3e@92.53.188.111:443?security=tls&sni=iryiccyne.wwtraveler.com&type=grpc&serviceName=michi&fp=chrome&alpn=http/1.1,h2#🔒 VL-GRPC-TLS 🇸🇮 SI-92.53.188.111:443
 vless://1b29e776-9c31-4e07-a584-0d3872d9eee6@104.18.218.118:8443?security=tls&sni=Join.VPNCUSTOMIZE.usa.speedtest.net.Naziitness.com&type=ws&host=Join.VPNCUSTOMIZE.usa.speedtest.net.Naziitness.com&path=%2FTelegram%2CVPNCUSTOMIZE%3Fed%3D8443&fp=chrome&alpn=h3,h2,http/1.1#🔒 VL-WS-TLS 🏴‍☠️ NA-104.18.218.118:8443
 vless://05519058-d2ac-4f28-9e4a-2b2a1386749e@15.223.108.164:22222?security=tls&sni=telegram-channel-vlessconfig.sohala.uk&type=ws&host=telegram-channel-vlessconfig.sohala.uk&path=/telegram-channel-vlessconfig-ws#🔒 VL-WS-TLS 🇨🇦 CA-15.223.108.164:22222
-vless://aacbbca-acba-aabc-bdca-aacacccbbabb@127.0.0.1:8080?security=tls&type=tcp# (5)
+vless://aacbbca-acba-aabc-bdca-aacacccbbabb@127.0.0.1:8080?security=tls&type=tcp #(5)
 trojan://acacbab-caba-caab-acbd-bcacbcaabcab@127.0.0.1:1080?security=tls&type=tcp#🔄 LATEST-UPDATE 📅 TUE-09-BAHMAN-1403 🕑 12:35
 trojan://ccbabaa-bcaa-abac-cbad-cbbabccabaac@127.0.0.1:2080?security=tls&type=tcp#💻 ART-INTL-TOOLS 🧠 TELEGRAM-CHANNEL NEUROVANCE
 trojan://Aimer@162.159.44.168:443?security=tls&sni=ngepx.ambercc.filegear-sg.me&type=tcp#🔒 TR-TCP-TLS 🏴‍☠️ NA-162.159.44.168:443
@@ -2987,4 +2987,4 @@ trojan://4732adfa16c6450bbef87264e41332db@nextstepcareer.online:443?security=tls
 trojan://4732adfa16c6450bbef87264e41332db@165.22.74.230:443?security=tls&sni=nextstepcareer.online#%F0%9F%87%A9%F0%9F%87%AADE-165.22.74.230-0470
 trojan://telegram-id-privatevpns@51.20.205.194:22222?security=tls&sni=trojan.burgerip.co.uk#%F0%9F%87%B8%F0%9F%87%AASE-51.20.205.194-0840
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@connectwithemployers.online:443?security=tls#%F0%9F%87%B8%F0%9F%87%ACSG-139.59.119.143-0538
-trojan://2cba4104747d49d18319e5ade1b93ab5@yourjobnavigator.online:443?security=tls# (6)
+trojan://2cba4104747d49d18319e5ade1b93ab5@yourjobnavigator.online:443?security=tls #(6)
