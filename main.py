@@ -6,7 +6,7 @@ import os
 import logging
 
 # Настройка логирования
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')  # Уровень DEBUG для максимальной детализации
 
 # Конфигурация
 TIMEOUT = 30  # seconds
@@ -161,12 +161,15 @@ def main():
     # *** ВАЖНО: Убедитесь, что используете renamed_configs для записи! ***
     # Write merged configs to output file
     output_filename = os.path.join(output_folder, "All_Subs.txt")
-    logging.info(f"Запись в файл All_Subs.txt, первые 5 строк для записи (renamed_configs):") # Лог перед записью All_Subs
-    logging.debug(f"Первые 5 строк для записи в All_Subs.txt: {renamed_configs[:5]}") # Детальный лог
+    logging.info(f"Начинаем запись в файл All_Subs.txt, всего строк для записи: {len(renamed_configs)}") # Лог кол-ва строк
+    logging.debug(f"Первые 10 строк для записи в All_Subs.txt: {renamed_configs[:10]}") # Детальный лог первых 10 строк
+    logging.debug(f"Последние 10 строк для записи в All_Subs.txt: {renamed_configs[-10:]}") # Детальный лог последних 10 строк
+
     with open(output_filename, "w", encoding='utf-8') as f:
         if renamed_configs: # **Проверка: убедимся, что список не пустой**
-            for config in renamed_configs:
+            for index, config in enumerate(renamed_configs): # Добавим индекс для логирования
                 f.write(config + "\n")
+                logging.debug(f"Записана строка {index + 1}/{len(renamed_configs)}: {config}") # Лог каждой записанной строки
             logging.info(f"Записан файл: {output_filename}, строк: {len(renamed_configs)}")
         else:
             logging.warning("Список renamed_configs пуст, файл All_Subs.txt не будет записан.") # Предупреждение, если список пуст
