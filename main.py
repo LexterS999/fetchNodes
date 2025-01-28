@@ -10,7 +10,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 # Конфигурация
 TIMEOUT = 30  # seconds
-PROTOCOLS = ["vmess", "vless", "trojan", "ss", "ssr", "hy2", "tuic", "warp://"]
+PROTOCOLS = ["vless", "trojan", "tuic", "hy2"] # Обновленный список протоколов для фильтрации и сортировки
+ALLOWED_PROTOCOLS_PREFIXES = [protocol + "://" for protocol in PROTOCOLS] # Префиксы протоколов для проверки начала строки
 LINKS = [
     "https://raw.githubusercontent.com/lagzian/SS-Collector/refs/heads/main/VLESS/VL100.txt",
     "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/subscribe/security/tls",
@@ -59,26 +60,26 @@ def fetch_and_decode_links(links, decode_content=True):
     return decoded_data
 
 
-# Filter function to select lines based on specified protocols
-def filter_for_protocols(data, protocols):
+# Filter function to select lines based on specified protocols (start of line)
+def filter_for_protocols(data, allowed_protocol_prefixes):
     filtered_data = []
     for line in data:
-        if any(protocol in line for protocol in protocols):
+        if any(line.startswith(prefix) for prefix in allowed_protocol_prefixes): # Проверяем начало строки на префикс протокола
             filtered_data.append(line)
     return filtered_data
 
 # Функция для определения протокола из строки
 def get_protocol_from_line(line, protocols):
-    for protocol in protocols:
-        if line.startswith(protocol + "://"): # Проверка начала строки на протокол://
-            return protocol
-    return "other" # Если протокол не найден, возвращаем "other"
+    for protocol_prefix in ALLOWED_PROTOCOLS_PREFIXES: # Используем префиксы для определения протокола
+        if line.startswith(protocol_prefix):
+            return protocol_prefix[:-3] # Удаляем "://" из префикса, чтобы получить имя протокола
+    return "other"
 
 # Функция сортировки данных по протоколу, затем по алфавиту
 def sort_data_by_protocol(data, protocols):
     def protocol_sort_key(line):
         protocol = get_protocol_from_line(line, protocols)
-        protocol_priority = protocols.index(protocol) if protocol != "other" else len(protocols) # Приоритет протокола, "other" в конце
+        protocol_priority = protocols.index(protocol) if protocol != "other" and protocol in protocols else len(protocols) # Приоритет протокола, "other" в конце
         return (protocol_priority, line) # Сортировка сначала по приоритету протокола, затем по строке
 
     return sorted(data, key=protocol_sort_key)
@@ -110,10 +111,10 @@ def main():
     unique_data = list(set(combined_data))
     logging.info(f"Удалено дубликатов: {len(combined_data) - len(unique_data)}")
 
-    merged_configs = filter_for_protocols(unique_data, PROTOCOLS)
+    filtered_configs = filter_for_protocols(unique_data, ALLOWED_PROTOCOLS_PREFIXES) # Фильтрация по префиксам протоколов
 
     # Сортировка по протоколу
-    sorted_configs = sort_data_by_protocol(merged_configs, PROTOCOLS)
+    sorted_configs = sort_data_by_protocol(filtered_configs, PROTOCOLS)
 
     # Clean existing output files
     output_filename = os.path.join(output_folder, "All_Subs.txt")
@@ -133,7 +134,7 @@ def main():
 
     # Write merged configs to output file
     with open(output_filename, "w", encoding='utf-8') as f:
-        for config in sorted_configs: # Используем отсортированные конфиги
+        for config in sorted_configs: # Используем отсортированные и отфильтрованные конфиги
             f.write(config + "\n")
 
     # Split merged configs into smaller files
