@@ -32,12 +32,11 @@ SUB_FOLDER_NAME = "Subs"
 # Base64 decoding function
 def decode_base64(encoded):
     decoded = ""
-    for encoding in ["utf-8", "iso-859-1"]:
-        try:
-            decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode(encoding)
-            break
-        except (UnicodeDecodeError, binascii.Error):
-            pass
+    try:
+        decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode("utf-8")
+    except (UnicodeDecodeError, binascii.Error, LookupError) as e: # Добавлено отслеживание LookupError и имени исключения
+        logging.error(f"Ошибка декодирования Base64: {e}") # Логирование ошибки декодирования
+        pass
     return decoded
 
 
