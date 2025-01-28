@@ -129,7 +129,6 @@ def main():
 
     filtered_configs = filter_for_protocols(unique_data, ALLOWED_PROTOCOLS_PREFIXES)
     logging.info(f"После фильтрации протоколов осталось: {len(filtered_configs)}")
-    logging.debug(f"Первые 5 строк после фильтрации: {filtered_configs[:5]}") # Лог первых 5 строк после фильтрации
 
     # Сортировка по протоколу
     sorted_configs = sort_data_by_protocol(filtered_configs, PROTOCOLS)
@@ -138,8 +137,8 @@ def main():
     # Переименование профилей
     renamed_configs = rename_profiles(sorted_configs)
     logging.info(f"Переименовано профилей: {len(renamed_configs)}")
-    logging.debug(f"Первые 5 строк после переименования: {renamed_configs[:5]}") # Лог первых 5 строк после переименования
 
+    logging.debug(f"Первые 5 переименованных конфигов: {renamed_configs[:5]}")
 
     # Clean existing output files
     output_filename = os.path.join(output_folder, "All_Subs.txt")
@@ -148,27 +147,24 @@ def main():
 
     if os.path.exists(output_filename):
         os.remove(output_filename)
-        logging.info(f"Удален старый файл: {output_filename}")
+        logging.info(f"Удален старый файл: {output_filename}") # Лог удаления All_Subs.txt
 
     for i in range(20): # Увеличьте диапазон при необходимости
         sub_filename = sub_output_filename_pattern.format(i+1)
         base64_filename = base64_output_filename_pattern.format(i+1)
         if os.path.exists(sub_filename):
             os.remove(sub_filename)
-            logging.info(f"Удален старый файл: {sub_filename}")
+            logging.info(f"Удален старый файл: {sub_filename}") # Лог удаления Sub{i}.txt
         if os.path.exists(base64_filename):
             os.remove(base64_filename)
-            logging.info(f"Удален старый файл: {base64_filename}")
+            logging.info(f"Удален старый файл: {base64_filename}") # Лог удаления Sub{i}_base64.txt
 
 
     # Write merged configs to output file
-    output_filename = os.path.join(output_folder, "All_Subs.txt")
-    logging.info(f"Запись в файл All_Subs.txt, первые 5 строк для записи:") # Лог перед записью All_Subs
-    logging.debug(f"Первые 5 строк для записи в All_Subs.txt: {renamed_configs[:5]}") # Детальный лог
     with open(output_filename, "w", encoding='utf-8') as f:
         for config in renamed_configs:
             f.write(config + "\n")
-        logging.info(f"Записан файл: {output_filename}, строк: {len(renamed_configs)}")
+        logging.info(f"Записан файл: {output_filename}, строк: {len(renamed_configs)}") # Лог записи All_Subs.txt
 
     # Split merged configs into smaller files
     with open(output_filename, "r", encoding='utf-8') as f:
@@ -179,12 +175,12 @@ def main():
 
     for i in range(num_files):
         sub_filename = sub_output_filename_pattern.format(i + 1) # Using pattern
-        sub_file_lines = lines[i * MAX_LINES_PER_FILE:min((i + 1) * MAX_LINES_PER_FILE, num_lines)]
-        logging.info(f"Запись в файл Sub{i+1}.txt, первые 5 строк для записи:") # Лог перед записью Sub{i}.txt
-        logging.debug(f"Первые 5 строк для записи в Sub{i+1}.txt: {sub_file_lines[:5]}") # Детальный лог
         with open(sub_filename, "w", encoding='utf-8') as f:
+            start_index = i * MAX_LINES_PER_FILE
+            end_index = min((i + 1) * MAX_LINES_PER_FILE, num_lines)
+            sub_file_lines = lines[start_index:end_index]
             f.writelines(sub_file_lines) # Use writelines for efficiency
-            logging.info(f"Записан файл: {sub_filename}, строк: {len(sub_file_lines)}")
+            logging.info(f"Записан файл: {sub_filename}, строк: {len(sub_file_lines)}") # Лог записи Sub{i}.txt
 
         base64_filename = base64_output_filename_pattern.format(i + 1) # Using pattern
         with open(base64_filename, "w", encoding='utf-8') as output_file:
@@ -192,7 +188,7 @@ def main():
                 config_data = input_file.read()
             encoded_config = base64.b64encode(config_data.encode()).decode()
             output_file.write(encoded_config)
-            logging.info(f"Записан файл: {base64_filename}, base64 версия файла: {sub_filename}")
+            logging.info(f"Записан файл: {base64_filename}, base64 версия файла: {sub_filename}") # Лог записи Sub{i}_base64.txt
 
 
 if __name__ == "__main__":
