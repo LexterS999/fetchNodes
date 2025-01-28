@@ -32,7 +32,7 @@ SUB_FOLDER_NAME = "Subs"
 # Base64 decoding function
 def decode_base64(encoded):
     decoded = ""
-    for encoding in ["utf-8", "iso-8859-1"]:
+    for encoding in ["utf-8", "iso-859-1"]:
         try:
             decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode(encoding)
             break
@@ -90,11 +90,11 @@ def rename_profiles(configs):
     for index, config in enumerate(configs):
         hash_index = config.rfind("#") # Ищем последний символ '#'
         if hash_index != -1:
-            base_config = config[:hash_index] # Обрезаем строку до '#'
-            renamed_config = f"{base_config}# ({index + 1})" # Добавляем новый профиль с номером
+            base_config = config[:hash_index].rstrip() # Обрезаем строку до '#' и удаляем пробелы справа
+            renamed_config = f"{base_config} #({index + 1})" # Добавляем новый профиль с номером и пробелом
             renamed_configs.append(renamed_config)
         else:
-            renamed_configs.append(config + f"# ({index + 1})") # Если '#' нет, добавляем в конец
+            renamed_configs.append(config.rstrip() + f" #({index + 1})") # Если '#' нет, добавляем в конец и удаляем пробелы справа
     return renamed_configs
 
 
@@ -120,17 +120,24 @@ def main():
 
     combined_data = decoded_links_data + decoded_dir_links_data
 
+    logging.info(f"Исходное количество строк: {len(combined_data)}") # Отладка: исходное количество
+
     # Удаление дубликатов
     unique_data = list(set(combined_data))
-    logging.info(f"Удалено дубликатов: {len(combined_data) - len(unique_data)}")
+    logging.info(f"Удалено дубликатов: {len(combined_data) - len(unique_data)}, осталось уникальных: {len(unique_data)}") # Отладка: дедупликация
 
     filtered_configs = filter_for_protocols(unique_data, ALLOWED_PROTOCOLS_PREFIXES)
+    logging.info(f"После фильтрации протоколов осталось: {len(filtered_configs)}") # Отладка: фильтрация
 
     # Сортировка по протоколу
     sorted_configs = sort_data_by_protocol(filtered_configs, PROTOCOLS)
 
+    logging.info("Применяется переименование профилей...") # Отладка: начало переименования
     # Переименование профилей
     renamed_configs = rename_profiles(sorted_configs)
+    logging.info(f"Переименовано профилей: {len(renamed_configs)}") # Отладка: конец переименования, количество переименованных
+
+    logging.debug(f"Первые 5 переименованных конфигов: {renamed_configs[:5]}") # Отладка: просмотр первых нескольких переименованных конфигов
 
     # Clean existing output files
     output_filename = os.path.join(output_folder, "All_Subs.txt")
