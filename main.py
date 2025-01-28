@@ -36,7 +36,7 @@ def decode_base64(encoded):
     decoded = ""
     try:
         decoded_bytes = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4))
-        decoded = decoded_bytes.decode("utf-8", errors='ignore') # Добавлено errors='ignore'
+        decoded = decoded_bytes.decode("utf-8", errors='ignore') # Исправление: добавлено errors='ignore'
     except (UnicodeDecodeError, binascii.Error, LookupError) as e:
         logging.error(f"Ошибка декодирования Base64: {e}")
         pass
