@@ -13,14 +13,12 @@ import IP2Location
 import ipaddress
 import concurrent.futures
 from urllib.parse import urlparse, parse_qs
-from more_thread_sort import sort_nodes
 
 # Фиксированное время ожидания для HTTP-запросов (в секундах)
 TIMEOUT = 30
 
 def decode_base64(encoded):
     decoded = ""
-    # Пытаемся декодировать в разных кодировках
     for encoding in ["utf-8", "iso-8859-1"]:
         try:
             decoded = pybase64.b64decode(encoded + b"=" * (-len(encoded) % 4)).decode(encoding)
@@ -42,7 +40,7 @@ async def fetch_link(session, url):
         return ""
 
 async def fetch_dir_link(session, url):
-    """Асинхронная загрузка ссылки директории (обычный текст)."""
+    """Асинхронная загрузка ссылки директории (текстовый контент)."""
     try:
         async with session.get(url, timeout=TIMEOUT) as resp:
             text = await resp.text()
@@ -77,7 +75,6 @@ def filter_for_allowed_protocols(data, allowed_protocols):
     и у которых host является валидным IPv4-адресом.
     """
     filtered_data = []
-    pattern = re.compile(r'^(vless|trojan|tuic|hy2)://', re.IGNORECASE)
     for entry in data:
         entry = entry.strip()
         if any(entry.startswith(proto) for proto in allowed_protocols):
@@ -86,13 +83,12 @@ def filter_for_allowed_protocols(data, allowed_protocols):
                 host = m.group(2)
                 if is_valid_ipv4(host):
                     filtered_data.append(entry)
-            # Если не удается извлечь host, пропускаем запись
     return filtered_data
 
 def remove_duplicates(configs):
     """
     Удаление дубликатов по совпадению хоста и порта.
-    Если найден дубликат, оставляется запись с большей длиной.
+    При обнаружении дубликата оставляется запись с большей длиной.
     """
     unique = {}
     pattern = re.compile(r'^(vless|trojan|tuic|hy2)://(?:[^@]+@)?([^:/?#]+)(?::(\d+))', re.IGNORECASE)
@@ -135,18 +131,15 @@ def setup_ip2location(db_url, temp_dir):
 def format_profile(config, ip2_db):
     """
     Форматирование профиля в требуемый вид.
-    Извлекаются параметры URL (протокол, host, порт, тип соединения и security),
-    определяется сокращенное название протокола, добавляется эмодзи флага страны,
-    и формируется комментарий в формате:
+    Извлекаются параметры URL, определяется сокращенное название протокола,
+    добавляется эмодзи флага страны, и формируется комментарий в формате:
     "#🔒 TR-WS-TLS | <флаг> | 104.19.223.79:443"
     """
     try:
         parsed = urlparse(config)
         scheme = parsed.scheme.lower()
-        # Сопоставление сокращенного обозначения протокола
         proto_map = {"trojan": "TR", "vless": "VL", "tuic": "TC", "hy2": "HY"}
         proto_abbr = proto_map.get(scheme, scheme.upper())
-        # Извлечение userinfo и host:port
         netloc = parsed.netloc
         if "@" in netloc:
             _, host_port = netloc.split("@", 1)
@@ -157,7 +150,6 @@ def format_profile(config, ip2_db):
         else:
             host = host_port
             port = ""
-        # Извлечение параметров запроса
         qs = parse_qs(parsed.query)
         type_val = qs.get("type", [""])[0].upper()
         security_val = qs.get("security", [""])[0].upper()
@@ -166,7 +158,6 @@ def format_profile(config, ip2_db):
             profile_label += f"-{type_val}"
         if security_val:
             profile_label += f"-{security_val}"
-        # Получение эмодзи флага страны
         flag = ""
         try:
             rec = ip2_db.get_all(host)
@@ -174,9 +165,7 @@ def format_profile(config, ip2_db):
             flag = get_flag_emoji(country_code)
         except Exception:
             flag = ""
-        # Формирование финального комментария
         final_comment = f"🔒 {profile_label} | {flag} | {host}:{port}"
-        # Замена или добавление комментария в исходной записи
         if "#" in config:
             base_part = config.split("#", 1)[0]
             new_config = f"{base_part}#{final_comment}"
@@ -216,54 +205,38 @@ def separate_and_sort_configs(configs):
         separated[proto].sort(key=lambda x: len(x), reverse=True)
     return separated
 
-def ensure_directories_exist():
-    """Создание необходимых директорий для хранения результатов."""
-    output_folder = os.path.abspath(os.getcwd())
-    base64_folder = os.path.join(output_folder, "Base64")
-    subs_folder = os.path.join(output_folder, "Subs")
-    os.makedirs(output_folder, exist_ok=True)
-    os.makedirs(base64_folder, exist_ok=True)
-    os.makedirs(subs_folder, exist_ok=True)
-    return output_folder, base64_folder, subs_folder
+def ensure_output_dir():
+    """
+    Создание единственной директории для сохранения результатов:
+    'Splitted-By-Protocol'
+    """
+    output_dir = os.path.join(os.path.abspath(os.getcwd()), "Splitted-By-Protocol")
+    os.makedirs(output_dir, exist_ok=True)
+    return output_dir
 
-def write_results(separated_configs, output_folder, base64_folder, subs_folder):
+def write_results(separated_configs, output_dir):
     """
-    Запись объединенных подписок в файл, а затем разделение по протоколам.
-    Каждая группа разбивается на части по 600 записей с созданием base64‑аналогов.
+    Сохранение конфигураций по протоколам в файлы:
+      - vless.txt
+      - trojan.txt
+      - tuic.txt
+      - hy2.txt
+    Все файлы сохраняются в директории output_dir.
+    После записи выводится информативное сообщение с результатами.
     """
-    all_subs_path = os.path.join(output_folder, "All_Subs.txt")
-    if os.path.exists(all_subs_path):
-        os.remove(all_subs_path)
-    for i in range(20):
-        file_path = os.path.join(subs_folder, f"Sub{i}.txt")
-        if os.path.exists(file_path):
-            os.remove(file_path)
-    with open(all_subs_path, "w", encoding='utf-8') as f:
-        for proto in separated_configs:
-            for config in separated_configs[proto]:
+    summary = {}
+    for proto, configs in separated_configs.items():
+        file_path = os.path.join(output_dir, f"{proto}.txt")
+        with open(file_path, "w", encoding='utf-8') as f:
+            for config in configs:
                 f.write(config + "\n")
-    for proto in separated_configs:
-        proto_filename = os.path.join(output_folder, f"{proto}_Subs.txt")
-        with open(proto_filename, "w", encoding='utf-8') as f:
-            for config in separated_configs[proto]:
-                f.write(config + "\n")
-        with open(proto_filename, "r", encoding='utf-8') as f:
-            lines = f.readlines()
-        num_lines = len(lines)
-        max_lines_per_file = 600
-        num_files = (num_lines + max_lines_per_file - 1) // max_lines_per_file
-        for i in range(num_files):
-            sub_file_path = os.path.join(subs_folder, f"{proto}_Sub{i+1}.txt")
-            with open(sub_file_path, "w", encoding='utf-8') as sub_f:
-                start_index = i * max_lines_per_file
-                end_index = min((i + 1) * max_lines_per_file, num_lines)
-                sub_f.writelines(lines[start_index:end_index])
-            with open(sub_file_path, "r", encoding='utf-8') as input_file:
-                config_data = input_file.read()
-            base64_filename = os.path.join(base64_folder, f"{proto}_Sub{i+1}_base64.txt")
-            with open(base64_filename, "w", encoding='utf-8') as output_file:
-                encoded_config = base64.b64encode(config_data.encode()).decode()
-                output_file.write(encoded_config)
+        summary[proto] = len(configs)
+    # Вывод информативного лога по завершении работы
+    print("\nОбработка завершена.")
+    print("Сохранено конфигураций:")
+    for proto in ["vless", "trojan", "tuic", "hy2"]:
+        print(f"  {proto}: {summary.get(proto, 0)} записей")
+    print(f"Файлы сохранены в директории: {output_dir}")
 
 def cleanup_ip2location(bin_file, zip_file, temp_dir):
     """Удаление временных файлов базы IP2Location."""
@@ -275,12 +248,12 @@ def cleanup_ip2location(bin_file, zip_file, temp_dir):
         print(f"Ошибка при удалении временных файлов: {e}")
 
 async def async_main():
-    # Создание необходимых директорий
-    output_folder, base64_folder, subs_folder = ensure_directories_exist()
+    # Создание единственной директории для сохранения результатов
+    output_dir = ensure_output_dir()
     
     # Загрузка и подготовка базы IP2Location
     ip2location_url = "https://download.ip2location.com/lite/IP2LOCATION-LITE-DB1.BIN.ZIP"
-    temp_dir = os.path.join(output_folder, "temp_ip2location")
+    temp_dir = os.path.join(os.path.abspath(os.getcwd()), "temp_ip2location")
     os.makedirs(temp_dir, exist_ok=True)
     bin_file, zip_file = setup_ip2location(ip2location_url, temp_dir)
     ip2_db = IP2Location.IP2Location(bin_file)
@@ -346,7 +319,7 @@ async def async_main():
         "https://raw.githubusercontent.com/40OIL/domain.club/refs/heads/main/mtn4.txt",
         "https://raw.githubusercontent.com/40OIL/domain.club/refs/heads/main/07pr4n27.txt",
     ]
-    # Если имеются дополнительные директории с данными, добавьте их в этот список
+    # Если имеются дополнительные директории с данными, добавьте их сюда
     dir_links = []
     
     # Асинхронная загрузка всех подписок
@@ -356,27 +329,16 @@ async def async_main():
         if data:
             combined_data.extend(data.splitlines())
     
-    # Фильтрация по разрешенным протоколам и валидным IPv4
     allowed_protocols = ["vless://", "trojan://", "tuic://", "hy2://"]
     filtered_configs = filter_for_allowed_protocols(combined_data, allowed_protocols)
-    # Удаление дубликатов
     unique_configs = remove_duplicates(filtered_configs)
-    # Обогащение и форматирование профилей (параллельно)
     enriched_configs = enrich_configs(unique_configs, ip2_db)
-    # Разделение по протоколам и сортировка
     separated_configs = separate_and_sort_configs(enriched_configs)
-    # Запись результатов в файлы
-    write_results(separated_configs, output_folder, base64_folder, subs_folder)
-    # Очистка временных файлов базы IP2Location
+    write_results(separated_configs, output_dir)
     cleanup_ip2location(bin_file, zip_file, temp_dir)
-    # Дополнительная сортировка узлов (в отдельном потоке)
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        executor.submit(sort_nodes)
 
 def main():
     asyncio.run(async_main())
-    # При необходимости повторно выполнить сортировку узлов
-    sort_nodes()
 
 if __name__ == "__main__":
     main()
