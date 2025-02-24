@@ -10,41 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出仓库代码
+      # Проверка кода из репозитория
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # 确保拉取完整提交历史
+          fetch-depth: 0 # Получение полной истории коммитов
 
-      # 设置 Python 环境
+      # Настройка окружения Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12 # 替换为你的 Python 版本
+          python-version: 3.12 # Укажите требуемую версию Python
 
-      # 安装依赖项
+      # Установка зависимостей
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 运行 main.py
+      # Запуск скрипта main.py
       - name: Run main.py
         run: python main.py
 
-      # 清理 __pycache__
+      # Очистка каталогов __pycache__
       - name: Clean up __pycache__
         run: |
           find . -name "__pycache__" -type d -exec rm -rf {} +
 
-      # 提交生成的文件回仓库
+      # Коммит и отправка изменений в репозиторий
       - name: Commit and push changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git pull origin master # 确保与远程分支同步
-          git add . 
-          git commit -m "♻️ $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S') Collected"
+          git pull origin master # Синхронизация с удалённой веткой master
+          git add .
+          git commit -m "♻️ $(TZ='Asia/Ashgabat' date '+%Y-%m-%d %H:%M:%S') Collected"
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
