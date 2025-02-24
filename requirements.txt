@@ -1,2 +1,5 @@
 pybase64
 requests
+IP2Location
+asyncio
+aiohttp
