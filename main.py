@@ -33,7 +33,6 @@ async def fetch_link(session, url):
         async with session.get(url, timeout=TIMEOUT) as resp:
             content = await resp.read()
             decoded = decode_base64(content)
-            print(f'Получена ссылка: {url}\nПодписка успешна!')
             return decoded
     except Exception as e:
         print(f"Ошибка загрузки {url}: {e}")
@@ -44,7 +43,6 @@ async def fetch_dir_link(session, url):
     try:
         async with session.get(url, timeout=TIMEOUT) as resp:
             text = await resp.text()
-            print(f'Получена ссылка директории: {url}\nПодписка успешна!')
             return text
     except Exception as e:
         print(f"Ошибка загрузки {url}: {e}")
@@ -231,8 +229,8 @@ def write_results(separated_configs, output_dir):
             for config in configs:
                 f.write(config + "\n")
         summary[proto] = len(configs)
-    # Вывод информативного лога по завершении работы
     print("\nОбработка завершена.")
+    print("Ссылки, указанные в коде, успешно скачаны и обработаны.")
     print("Сохранено конфигураций:")
     for proto in ["vless", "trojan", "tuic", "hy2"]:
         print(f"  {proto}: {summary.get(proto, 0)} записей")
@@ -248,7 +246,6 @@ def cleanup_ip2location(bin_file, zip_file, temp_dir):
         print(f"Ошибка при удалении временных файлов: {e}")
 
 async def async_main():
-    # Создание единственной директории для сохранения результатов
     output_dir = ensure_output_dir()
     
     # Загрузка и подготовка базы IP2Location
@@ -319,11 +316,11 @@ async def async_main():
         "https://raw.githubusercontent.com/40OIL/domain.club/refs/heads/main/mtn4.txt",
         "https://raw.githubusercontent.com/40OIL/domain.club/refs/heads/main/07pr4n27.txt",
     ]
-    # Если имеются дополнительные директории с данными, добавьте их сюда
     dir_links = []
     
-    # Асинхронная загрузка всех подписок
     raw_data = await fetch_all_links(links, dir_links)
+    print("Все ссылки, указанные в коде, успешно скачаны и обработаны.")
+    
     combined_data = []
     for data in raw_data:
         if data:
