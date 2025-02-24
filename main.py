@@ -220,7 +220,7 @@ def write_results(separated_configs, output_dir):
       - tuic.txt
       - hy2.txt
     Все файлы сохраняются в директории output_dir.
-    После записи выводится информативное сообщение с результатами.
+    После записи выводится информативный лог с результатами.
     """
     summary = {}
     for proto, configs in separated_configs.items():
@@ -229,7 +229,7 @@ def write_results(separated_configs, output_dir):
             for config in configs:
                 f.write(config + "\n")
         summary[proto] = len(configs)
-    print("\nОбработка завершена.")
+    print("Обработка завершена.")
     print("Ссылки, указанные в коде, успешно скачаны и обработаны.")
     print("Сохранено конфигураций:")
     for proto in ["vless", "trojan", "tuic", "hy2"]:
