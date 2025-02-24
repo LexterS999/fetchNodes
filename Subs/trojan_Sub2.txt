@@ -1,0 +1,159 @@
+trojan://blue2024@104.18.121.158:443?security=tls&sni=td.promote.icu&type=tcp#🔒 TR-TCP-TLS |  | 104.18.121.158:443
+trojan://0000000@3.168.86.35:443?security=tls&sni=www.lovelive-anime.jp&type=tcp#🔒 TR-TCP-TLS |  | 3.168.86.35:443
+trojan://blue2024@172.67.142.60:443?security=tls&sni=td.promote.icu&type=tcp#🔒 TR-TCP-TLS | 🇺🇸 | 172.67.142.60:443
+trojan://Aimer@108.165.152.29:2096?sni=agept.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR |  | 108.165.152.29:2096
+trojan://Aimer@188.164.159.91:2083?sni=agepy.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR |  | 188.164.159.91:2083
+trojan://Aimer@152.70.245.66:12693?sni=agept.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR |  | 152.70.245.66:12693
+trojan://Aimer@92.243.74.239:8443?sni=agepy.ambercc.filegear-sg.me&allowInsecure=0#🔒 TR | 🇰🇭 | 92.243.74.239:8443
+trojan://Aimer@206.238.237.86:2087?sni=agepy.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR |  | 206.238.237.86:2087
+trojan://Aimer@155.46.213.38:2083?sni=agepw.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇺🇸 | 155.46.213.38:2083
+trojan://Aimer@125.132.46.2:10022?sni=agepq.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇰🇷 | 125.132.46.2:10022
+trojan://89f84d5e-4170-4c64-bc78-ac99953b103a@5.83.221.31:50011?sni=sk05.zygbx.com#🔒 TR | 🇬🇧 | 5.83.221.31:50011
+trojan://blue2024@172.64.35.83:443?security=tls&sni=ta.promote.icu&type=tcp#🔒 TR-TCP-TLS | 🇺🇸 | 172.64.35.83:443
+trojan://blue2024@190.93.245.62:443?security=tls&sni=td.promote.icu&type=tcp#🔒 TR-TCP-TLS |  | 190.93.245.62:443
+trojan://blue2024@172.64.146.66:443?security=tls&sni=ta.promote.icu&type=tcp#🔒 TR-TCP-TLS |  | 172.64.146.66:443
+trojan://blue2024@104.17.40.244:443?security=tls&sni=td.promote.icu&type=tcp#🔒 TR-TCP-TLS |  | 104.17.40.244:443
+trojan://ouo@65.75.193.154:14491?sni=tr.koiok.us.kg&type=ws&host=tr.koiok.us.kg#🔒 TR-WS |  | 65.75.193.154:14491
+trojan://Aimer@173.245.59.128:443?sni=agepy.ambercc.filegear-sg.me&allowInsecure=0#🔒 TR |  | 173.245.59.128:443
+trojan://Aimer@212.41.15.119:443?sni=agepy.ambercc.filegear-sg.me&allowInsecure=0#🔒 TR | 🇷🇺 | 212.41.15.119:443
+trojan://Aimer@23.94.211.148:443?sni=ngepz.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇺🇸 | 23.94.211.148:443
+trojan://Aimer@209.94.90.87:2087?sni=agepy.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇺🇸 | 209.94.90.87:2087
+trojan://Aimer@46.29.235.36:2053?sni=agepu.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇩🇰 | 46.29.235.36:2053
+trojan://3774827088566296576@13.213.142.42:443?sni=exotic-bengal.treefrog761.one#🔒 TR | 🇸🇬 | 13.213.142.42:443
+trojan://3778399737045327872@18.197.235.48:443?sni=popular-pheasant.adder289.quest#🔒 TR |  | 18.197.235.48:443
+trojan://Aimer@77.74.228.4:2087?sni=agepw.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇺🇸 | 77.74.228.4:2087
+trojan://89f84d5e-4170-4c64-bc78-ac99953b103a@5.83.221.31:50030?allowInsecure=0#🔒 TR | 🇬🇧 | 5.83.221.31:50030
+trojan://Aimer@45.194.53.13:2053?sni=agept.ambercc.filegear-sg.me&allowInsecure=0#🔒 TR |  | 45.194.53.13:2053
+trojan://Aimer@27.50.49.188:2096?sni=agept.ambercc.filegear-sg.me&allowInsecure=1#🔒 TR |  | 27.50.49.188:2096
+trojan://3787016351714123776@13.37.126.60:443?sni=magnetic-chicken.treefrog761.one#🔒 TR |  | 13.37.126.60:443
+trojan://0c9d4730-e296-11ef-a5d2-1239d0255272@51.210.182.170:443?allowInsecure=1#🔒 TR |  | 51.210.182.170:443
+trojan://Aimer@5.182.84.120:443?sni=agepy.aimercc.filegear-sg.me&allowInsecure=1#🔒 TR | 🇷🇺 | 5.182.84.120:443
+trojan://89f84d5e-4170-4c64-bc78-ac99953b103a@5.83.221.31:50015?allowInsecure=0#🔒 TR | 🇬🇧 | 5.83.221.31:50015
+trojan://Aimer@18.136.16.233:443?sni=agept.ambercc.filegear-sg.me&allowInsecure=0#🔒 TR |  | 18.136.16.233:443
+trojan://fuck@42.236.73.72:443?security=tls&sni=www.zitian.cn&type=tcp#🔒 TR-TCP-TLS | 🇨🇳 | 42.236.73.72:443
+trojan://3778399737045327872@43.201.92.10:443?sni=coherent-drum.adder289.quest#🔒 TR | 🇰🇷 | 43.201.92.10:443
+trojan://Aimer@112.185.223.152:50000?sni=agepw.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 112.185.223.152:50000
+trojan://eJ67ay58NI@188.34.194.165:8080?type=tcp&security=none#🔒 TR-TCP-NONE | 🇩🇪 | 188.34.194.165:8080
+trojan://Aimer@108.165.152.252:2096?sni=agept.ambercc.filegear-sg.me#🔒 TR | 🇮🇳 | 108.165.152.252:2096
+trojan://Aimer@206.238.236.198:2083?sni=agepw.ambercc.filegear-sg.me#🔒 TR | 🇸🇬 | 206.238.236.198:2083
+trojan://Aimer@206.238.236.216:2083?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇸🇬 | 206.238.236.216:2083
+trojan://Aimer@185.119.117.146:8443?sni=agepq.ambercc.filegear-sg.me#🔒 TR | 🇦🇹 | 185.119.117.146:8443
+trojan://Aimer@118.45.241.209:50000?sni=agepq.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 118.45.241.209:50000
+trojan://Aimer@162.159.134.143:2096?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 162.159.134.143:2096
+trojan://Aimer@206.238.237.146:2083?sni=agept.ambercc.filegear-sg.me#🔒 TR | 🇸🇬 | 206.238.237.146:2083
+trojan://Aimer@118.46.215.195:18048?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇰🇷 | 118.46.215.195:18048
+trojan://Aimer@211.105.11.175:12250?sni=agept.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 211.105.11.175:12250
+trojan://3747000103274291200@52.79.40.3:443?sni=epic-bunny.adder289.quest#🔒 TR | 🇰🇷 | 52.79.40.3:443
+trojan://Aimer@188.164.159.43:2083?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇨🇿 | 188.164.159.43:2083
+trojan://Aimer@162.159.44.232:2096?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 162.159.44.232:2096
+trojan://Aimer@118.37.220.10:11300?sni=ngepo.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 118.37.220.10:11300
+trojan://Aimer@162.159.44.229:8443?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 162.159.44.229:8443
+trojan://Aimer@108.165.152.113:443?sni=agept.ambercc.filegear-sg.me#🔒 TR | 🇮🇳 | 108.165.152.113:443
+trojan://Aimer@156.229.164.148:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 156.229.164.148:443
+trojan://Aimer@129.146.226.222:587?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 129.146.226.222:587
+trojan://Aimer@104.19.239.137:2087?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 104.19.239.137:2087
+trojan://Aimer@129.226.150.167:443?sni=agepq.ambercc.filegear-sg.me#🔒 TR | 🇸🇬 | 129.226.150.167:443
+trojan://Aimer@206.238.236.137:8443?sni=agept.ambercc.filegear-sg.me#🔒 TR |  | 206.238.236.137:8443
+trojan://Aimer@175.192.27.197:16992?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 175.192.27.197:16992
+trojan://Aimer@199.34.228.178:8443?sni=agepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 199.34.228.178:8443
+trojan://Aimer@206.238.236.90:2087?sni=agept.ambercc.filegear-sg.me#🔒 TR | 🇸🇬 | 206.238.236.90:2087
+trojan://696cfe79@192.9.132.79:443?allowInsecure=1&sni=sje.5216818.xyz#🔒 TR | 🇺🇸 | 192.9.132.79:443
+trojan://Aimer@154.17.228.203:443?sni=agepq.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 154.17.228.203:443
+trojan://Aimer@154.197.64.233:443?sni=ngepx.ambercc.filegear-sg.me#🔒 TR | 🇮🇳 | 154.197.64.233:443
+trojan://Aimer@38.59.242.169:27738?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 38.59.242.169:27738
+trojan://Aimer@104.19.86.120:2096?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 104.19.86.120:2096
+trojan://Aimer@77.238.236.134:8443?sni=agepq.ambercc.filegear-sg.me#🔒 TR |  | 77.238.236.134:8443
+trojan://Aimer@162.159.38.103:2083?sni=agepq.ambercc.filegear-sg.me#🔒 TR |  | 162.159.38.103:2083
+trojan://Aimer@104.196.250.34:2087?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 104.196.250.34:2087
+trojan://Aimer@221.165.64.92:50000?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 221.165.64.92:50000
+trojan://Aimer@129.154.207.203:443?sni=agept.ambercc.filegear-sg.me#🔒 TR |  | 129.154.207.203:443
+trojan://Aimer@95.216.143.166:443?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇫🇮 | 95.216.143.166:443
+trojan://Aimer@14.41.85.118:12101?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 14.41.85.118:12101
+trojan://Aimer@206.238.236.31:8443?sni=agept.ambercc.filegear-sg.me#🔒 TR |  | 206.238.236.31:8443
+trojan://Aimer@194.87.252.135:2053?sni=agepy.ambercc.filegear-sg.me#🔒 TR |  | 194.87.252.135:2053
+trojan://Aimer@188.166.162.201:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 188.166.162.201:443
+trojan://Aimer@168.138.204.44:587?sni=ngepo.ambercc.filegear-sg.me#🔒 TR | 🇯🇵 | 168.138.204.44:587
+trojan://Aimer@173.245.59.203:443?sni=ngepx.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 173.245.59.203:443
+trojan://Aimer@103.116.7.152:2096?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 103.116.7.152:2096
+trojan://Aimer@108.162.194.193:443?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 108.162.194.193:443
+trojan://Aimer@104.19.60.193:2083?sni=agepy.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 104.19.60.193:2083
+trojan://Aimer@91.149.239.252:443?sni=ngepo.ambercc.filegear-sg.me#🔒 TR | 🇦🇺 | 91.149.239.252:443
+trojan://Aimer@192.227.231.25:444?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 192.227.231.25:444
+trojan://Aimer@45.155.121.169:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇵🇱 | 45.155.121.169:443
+trojan://Aimer@92.243.74.180:8443?sni=agepy.ambercc.filegear-sg.me#🔒 TR | 🇰🇭 | 92.243.74.180:8443
+trojan://Aimer@45.66.216.162:50000?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 45.66.216.162:50000
+trojan://96cad374-7573-4463-8804-4665c2c3d932@18.143.179.35:6001?#🔒 TR | 🇸🇬 | 18.143.179.35:6001
+trojan://Aimer@103.116.7.235:443?sni=agepw.ambercc.filegear-sg.me#🔒 TR | 🇨🇳 | 103.116.7.235:443
+trojan://Aimer@172.64.33.73:2096?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 172.64.33.73:2096
+trojan://Aimer@82.115.6.219:8443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 82.115.6.219:8443
+trojan://Aimer@47.236.251.178:443?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 47.236.251.178:443
+trojan://Aimer@27.50.48.189:2083?sni=agepy.ambercc.filegear-sg.me#🔒 TR | 🇭🇰 | 27.50.48.189:2083
+trojan://Aimer@154.9.249.242:443?sni=agepu.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 154.9.249.242:443
+trojan://Aimer@107.175.37.135:443?sni=ngepo.ambercc.filegear-sg.me#🔒 TR |  | 107.175.37.135:443
+trojan://Aimer@45.67.214.41:2083?sni=agepw.ambercc.filegear-sg.me#🔒 TR | 🇨🇾 | 45.67.214.41:2083
+trojan://Aimer@162.159.39.181:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 162.159.39.181:443
+trojan://Aimer@167.68.4.131:8443?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 167.68.4.131:8443
+trojan://Aimer@195.201.27.54:2096?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 195.201.27.54:2096
+trojan://Aimer@172.67.68.56:2096?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇺🇸 | 172.67.68.56:2096
+trojan://Aimer@172.67.157.40:2096?sni=agepu.ambercc.filegear-sg.me#🔒 TR |  | 172.67.157.40:2096
+trojan://Aimer@14.32.9.120:50000?sni=ngepo.ambercc.filegear-sg.me#🔒 TR | 🇰🇷 | 14.32.9.120:50000
+trojan://Aimer@5.182.86.252:2053?sni=ngepy.ambercc.filegear-sg.me#🔒 TR | 🇳🇱 | 5.182.86.252:2053
+trojan://Aimer@89.248.207.37:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR | 🇷🇺 | 89.248.207.37:443
+trojan://89f84d5e-4170-4c64-bc78-ac99953b103a@5.83.221.31:50018?#🔒 TR | 🇬🇧 | 5.83.221.31:50018
+trojan://SSorg@199.34.228.71:8443?sni=ssjj.esslh.filegear-sg.me#🔒 TR | 🇺🇸 | 199.34.228.71:8443
+trojan://a1b36c4d-446b-4402-9370-ec6dbf79e143@107.149.254.26:159?#🔒 TR |  | 107.149.254.26:159
+trojan://Aimer@46.254.92.191:443?sni=agepw.ambercc.filegear-sg.me#🔒 TR |  | 46.254.92.191:443
+trojan://Aimer@91.197.3.168:8443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 91.197.3.168:8443
+trojan://Aimer@3.124.196.164:443?sni=ngepx.ambercc.filegear-sg.me#🔒 TR |  | 3.124.196.164:443
+trojan://Aimer@34.218.130.79:443?sni=ngepx.ambercc.filegear-sg.me#🔒 TR |  | 34.218.130.79:443
+trojan://Aimer@172.64.33.128:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 172.64.33.128:443
+trojan://Aimer@219.76.13.180:443?sni=ngepz.ambercc.filegear-sg.me#🔒 TR |  | 219.76.13.180:443
+trojan://Aimer@103.30.78.183:444?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 103.30.78.183:444
+trojan://Aimer@154.211.8.98:2087?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 154.211.8.98:2087
+trojan://Aimer@38.28.194.67:443?sni=agepy.aimercc.filegear-sg.me#🔒 TR | 🇺🇸 | 38.28.194.67:443
+trojan://Aimer@52.40.102.162:443?sni=ngepx.ambercc.filegear-sg.me#🔒 TR |  | 52.40.102.162:443
+trojan://89f84d5e-4170-4c64-bc78-ac99953b103a@5.83.221.31:50043?#🔒 TR |  | 5.83.221.31:50043
+trojan://4ea1d07c-41c2-42b5-954d-414fee051856@112.3.28.12:46002?#🔒 TR |  | 112.3.28.12:46002
+trojan://Aimer@13.250.38.94:443?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 13.250.38.94:443
+trojan://Aimer@154.21.87.99:443?sni=ngepo.ambercc.filegear-sg.me#🔒 TR |  | 154.21.87.99:443
+trojan://Aimer@188.64.108.9:443?sni=agepy.aimercc.filegear-sg.me#🔒 TR |  | 188.64.108.9:443
+trojan://Aimer@8.212.48.236:443?sni=agept.ambercc.filegear-sg.me#🔒 TR |  | 8.212.48.236:443
+trojan://xuw6UrI1CzB_tpFz1kykrw@162.250.99.26:443?type=tcp#🔒 TR-TCP |  | 162.250.99.26:443
+trojan://blue2024@190.93.245.154:443?sni=hb.lii2010.us.kg#🔒 TR | 🇨🇷 | 190.93.245.154:443
+trojan://installshield@38.180.249.177:8443?allowInsecure=0#🔒 TR |  | 38.180.249.177:8443
+trojan://bpb-trojan@45.80.110.224:443?sni=bpb.my79801.com#🔒 TR | 🇪🇪 | 45.80.110.224:443
+trojan://blue2024@198.41.200.142:443?sni=ta.promote.icu#🔒 TR | 🇺🇸 | 198.41.200.142:443
+trojan://blue2024@188.114.99.102:443?sni=hb.lii2010.us.kg#🔒 TR |  | 188.114.99.102:443
+trojan://blue2024@162.159.22.138:443?sni=hb.lii2010.us.kg#🔒 TR |  | 162.159.22.138:443
+trojan://blue2024@104.16.112.144:443?sni=ta.promote.icu#🔒 TR | 🇺🇸 | 104.16.112.144:443
+trojan://blue2024@104.17.246.107:443?sni=ha.lii2010.us.kg#🔒 TR |  | 104.17.246.107:443
+trojan://blue2024@190.93.244.198:443?sni=td.promote.icu#🔒 TR | 🇨🇷 | 190.93.244.198:443
+trojan://blue2024@104.16.38.173:443?sni=hb.lii2010.us.kg#🔒 TR |  | 104.16.38.173:443
+trojan://blue2024@104.16.93.142:443?sni=td.promote.icu#🔒 TR | 🇺🇸 | 104.16.93.142:443
+trojan://blue2024@185.176.26.193:443?sni=b.promote.icu#🔒 TR |  | 185.176.26.193:443
+trojan://blue2024@104.18.153.27:443?sni=td.promote.icu#🔒 TR |  | 104.18.153.27:443
+trojan://blue2024@104.21.97.119:443?sni=td.promote.icu#🔒 TR |  | 104.21.97.119:443
+trojan://NISHIKUITAN111@162.159.16.224:443?#🔒 TR | 🇺🇸 | 162.159.16.224:443
+trojan://NISHIKUITAN111@190.93.247.175:443?#🔒 TR | 🇨🇷 | 190.93.247.175:443
+trojan://NISHIKUITAN111@104.17.157.109:443?#🔒 TR | 🇺🇸 | 104.17.157.109:443
+trojan://NISHIKUITAN111@185.193.29.193:443?#🔒 TR | 🇧🇪 | 185.193.29.193:443
+trojan://NISHIKUITAN111@141.101.122.171:443?#🔒 TR |  | 141.101.122.171:443
+trojan://NISHIKUITAN111@104.21.195.144:443?#🔒 TR | 🇺🇸 | 104.21.195.144:443
+trojan://NISHIKUITAN111@104.20.138.222:443?#🔒 TR | 🇺🇸 | 104.20.138.222:443
+trojan://NISHIKUITAN111@104.24.184.159:443?#🔒 TR | 🇺🇸 | 104.24.184.159:443
+trojan://65086441068973800@63.177.177.23:443?#🔒 TR |  | 63.177.177.23:443
+trojan://NISHIKUITAN111@173.245.59.91:443?#🔒 TR | 🇺🇸 | 173.245.59.91:443
+trojan://NISHIKUITAN111@104.19.44.160:443?#🔒 TR | 🇺🇸 | 104.19.44.160:443
+trojan://NISHIKUITAN111@104.24.60.239:443?#🔒 TR | 🇺🇸 | 104.24.60.239:443
+trojan://NISHIKUITAN111@198.41.217.62:443?#🔒 TR | 🇺🇸 | 198.41.217.62:443
+trojan://NISHIKUITAN111@104.16.218.64:443?#🔒 TR | 🇺🇸 | 104.16.218.64:443
+trojan://NISHIKUITAN111@198.41.205.240:443?#🔒 TR |  | 198.41.205.240:443
+trojan://NISHIKUITAN111@104.24.140.72:443?#🔒 TR | 🇺🇸 | 104.24.140.72:443
+trojan://NISHIKUITAN111@172.67.49.68:443?#🔒 TR | 🇺🇸 | 172.67.49.68:443
+trojan://NISHIKUITAN111@104.20.65.198:443?#🔒 TR |  | 104.20.65.198:443
+trojan://NISHIKUITAN111@104.16.80.174:443?#🔒 TR |  | 104.16.80.174:443
+trojan://NISHIKUITAN111@104.20.151.19:443?#🔒 TR |  | 104.20.151.19:443
+trojan://NISHIKUITAN111@104.25.22.6:443?#🔒 TR | 🇺🇸 | 104.25.22.6:443
+trojan://NISHIKUITAN111@45.131.7.206:443?#🔒 TR |  | 45.131.7.206:443
+trojan://NISHIKUITAN111@5.182.84.93:443?#🔒 TR |  | 5.182.84.93:443
+trojan://Aimer@47.79.37.55:2077?#🔒 TR | 🇯🇵 | 47.79.37.55:2077
