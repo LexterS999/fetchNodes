@@ -1,9 +1,9 @@
-name: Run main.py manually
+name: Run main.py
 
 on:
-  # schedule:
-  #   - cron: "0 */4 * * *" # 注释掉定时触发
-  workflow_dispatch: # 允许手动触发
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */10 * * *"
 
 jobs:
   run-main:
